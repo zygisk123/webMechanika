@@ -3,9 +3,9 @@ class Player{
 
     public $name;
     public $score;
-    function __construct($name = null, $score = null){
+    function __construct($name = null){
         $this->name = $name;
-        $this->score = $score;
+        $this->score = 0;
     }
 
     public function changeScore($points)

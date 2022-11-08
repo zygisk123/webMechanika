@@ -1,33 +1,14 @@
 <?php
 include "./Player.php";
-$startGame = 0;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $player1 = New Player($_POST["player_1"], 0);
-  $player2 = New Player($_POST["player_2"], 0);
-  $startGame = 1;
+if ($startGame == 1) {
+  if(isset($_GET['kauliukasMestas'])){
+    $startGame = 2;
 
+  }
 }
-if(isset($_GET['kauliukasMestas'])){
-  $startGame = 1;
-  if ($startGame == 1) {
-    $player1->changeScore(rand(1,6));
-    echo "wwwwwwwwwwwwwwwwwwwwwwwwwww";
-    die;
-    if ($player1->getScore() >= 30) {
-      echo "Laimejo " . $player1->getName();
-    } else{
-      $startGame = 1;
-    }
-  }
   if ($startGame == 2) {
-   $player2->changeScore(rand(1,6));
-    if ($player2->getScore() >= 30) {
-      echo "Laimejo " . $player2->getName();
-    } else{
-      $startGame = 1;
-    }  
-  }
+    $startGame = 1;
 }
 ?>
 <!DOCTYPE html>
@@ -39,33 +20,34 @@ if(isset($_GET['kauliukasMestas'])){
     <title>Document</title>
 </head>
 <body>
-  <?php if($startGame == 0) {?>
-    <form action="./index11.php" method="post">
+  <!-- <?php if(!isset($gameStarted)) {?> -->
+    <form action="./index12.php" method="post">
       <label for="player1">Player 1</label><br>
       <input type="text" id="player1" name="player_1"><br>
       <label for="player2">Player 2</label><br>
       <input type="text" id="player2" name="player_2"><br>
       <input type="submit" value="PRADETI">
     </form> 
-  <?php }?>
+  <!-- <?php }?>
 
-  <?php if ($startGame == 1) {?>
+  <?php if (isset($player1Play)) {?>
+    <form action="./index11.php" method="get">
+    <input type="hidden" name="kauliukasMestas">
+
+    <button type="submit">Mesti Kauliuka</button>
+    </form>
+    <?php
+    echo "<h1>".$player1Name."</h1>";
+    echo "<h1>".$player1Score."</h1>";
+  }?>
+  <?php if (isset($player2Play)) { ?>
     <form action="./index11.php" method="get">
     <input type="hidden" name="kauliukasMestas">
     <button type="submit">Mesti Kauliuka</button>
     </form>
     <?php
-    echo "<h1>".$player1->getName()."</h1>";
-    echo "<h1>".$player1->getScore()."</h1>";
-  }?>
-  <?php if ($startGame == 2) { ?>
-    <form action="./index11.php" method="get">
-    <input type="hidden" name="kauliukasMestas">
-    <button type="submit">Mesti Kauliuka</button>
-    </form>
-    <?php
-    echo "<h1>".$player2->getName()."</h1>";
-    echo "<h1>".$player2->getScore()."</h1>";
-  }?>
+    echo "<h1>".$player2Name."</h1>";
+    echo "<h1>".$player2Score."</h1>";
+  }?> -->
 </body>
 </html>
