@@ -4,7 +4,8 @@ $color = "000000";
 $checked = 0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo count($_POST["checkbox"]);
+    echo count($_POST["checkbox"])."<br>";
+    echo $_POST["length"];
     $color = "ffffff";
     $hide = 1;
 }
@@ -21,14 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body style="background-color:#<?= $color ?>;">
 <?php if(!isset($hide)) { 
     ?>
-<form style ="color:white;" action="./index9.php" method="post">
+<form style ="color:white;" action="./index10.php" method="post">
 <?php 
     $letters = ['A','B','C','D','E','F','H','I','J'];
-    for ($i=0; $i < rand(3,10); $i++) {?>
+    $length = rand(3,10);
+    for ($i=0; $i < $length; $i++) {?>
     <label> <?= $letters[$i] ?></label>     
     <input type="checkbox" name="checkbox[]" value="<?=$i?>">
 <?php }?>
     <input type="submit">
+    <input type="hidden" name="length" value="<?=$length?>">
 </form>
 <?php }?>
 </body>
