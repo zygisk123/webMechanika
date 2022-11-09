@@ -4,14 +4,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $playerScore = 0;
     $oponentName = $_POST["player_2"];
     $oponentScore = 0;
+    $start = 1;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $tempName = $_GET["playerName"];
-    $tempScore = $_GET["playerScore"];
-    $playerName = $_GET["oponentName"];
-    $playerScore = $_GET["oponentScore"];
-    $oponentName = $tempName;
-    $oponentScore = $tempScore;
+    if ($start == 1) {
+        $playerScore = 0;
+        
+    }
+    $playerName = $_GET["playerName"];
+    $playerScore = $playerScore + 5;
+    $oponentName = $_GET["oponentName"];
+    $oponentScore = $_GET["oponentScore"];
+    if ($playerScore >= 30) {
+        echo "Laimejo " . $playerName;
+    }else{
+        $tempName = $playerName;
+        $tempScore = $playerScore;
+        $playerName = $oponentName;
+        $playerScore = $oponentScore;
+        $oponentName = $tempName;
+        $oponentScore = $tempScore;
+    }
 }
 ?>
 <!DOCTYPE html>
